@@ -3,6 +3,8 @@ package com.nick.bb.fitness.util;
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
+
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.nick.bb.fitness.R;
 
@@ -72,5 +74,30 @@ public class ImageLoaderProxy {
                 .error(R.mipmap.default_img_bg)
                 .crossFade()
                 .into(imageView);
+    }
+    public void loadImageCF(Context context, String url, ImageView imageView,FormatType formatType) {
+        DrawableRequestBuilder builder = Glide.with(context)
+                .load(url)
+                .animate(R.anim.image_load)
+                .placeholder(R.mipmap.default_img_bg)
+                .error(R.mipmap.default_img_bg);
+        switch (formatType){
+            case CenterCrop:
+                builder.centerCrop();
+                break;
+            case CrossFade:
+                builder.crossFade();
+                break;
+            case FitCenter:
+                builder.fitCenter();
+                break;
+        }
+        builder.into(imageView);
+
+    }
+    public enum FormatType{
+        CenterCrop,
+        CrossFade,
+        FitCenter
     }
 }

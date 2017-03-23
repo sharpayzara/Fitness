@@ -2,7 +2,8 @@ package com.nick.bb.fitness.repository.impl;
 
 import android.content.Context;
 
-import com.nick.bb.fitness.api.GankApiService;
+import com.nick.bb.fitness.api.FitnessApiService;
+import com.nick.bb.fitness.api.entity.decor.BeautyList;
 import com.nick.bb.fitness.api.entity.decor.GankList;
 import com.nick.bb.fitness.repository.Repository;
 
@@ -14,15 +15,20 @@ import rx.Observable;
  */
 
 public class RepositoryImpl implements Repository{
-    private GankApiService mGankApiService;
+    private FitnessApiService mFitnessApiService;
     private Context mContext;
-    public RepositoryImpl(Context context, Retrofit gank) {
+    public RepositoryImpl(Context context, Retrofit retrofit) {
         mContext = context;
-        mGankApiService = gank.create(GankApiService.class);
+        mFitnessApiService = retrofit.create(FitnessApiService.class);
     }
 
     @Override
     public Observable<GankList> getGankList() {
-        return mGankApiService.getGankList();
+        return mFitnessApiService.getGankList();
+    }
+
+    @Override
+    public Observable<BeautyList> getBeautyList() {
+        return mFitnessApiService.getBeautyList();
     }
 }

@@ -1,5 +1,6 @@
 package com.nick.bb.fitness.repository;
 
+import com.nick.bb.fitness.api.entity.decor.BeautyList;
 import com.nick.bb.fitness.api.entity.decor.GankList;
 
 import rx.Observable;
@@ -13,4 +14,5 @@ import rx.Observable;
 public interface Repository {
     Observable<GankList> getGankList();
 
+    Observable<BeautyList> getBeautyList();
 }

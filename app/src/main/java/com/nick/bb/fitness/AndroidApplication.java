@@ -33,4 +33,8 @@ public class AndroidApplication extends Application{
     public ApplicationComponent getApplicationComponent() {
         return mApplicationComponent;
     }
+
+    public static Context getContext() {
+        return sContext;
+    }
 }

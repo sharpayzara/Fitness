@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.ui.adapter.MainPagerAdapter;
+import com.nick.bb.fitness.ui.fragment.BeautyFragment;
 import com.nick.bb.fitness.ui.fragment.GankFragment;
 import com.nick.bb.fitness.ui.widget.LoadingLayout;
 
@@ -40,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         fragmentList = new ArrayList<Fragment>();
         GankFragment gankFragment = new GankFragment();
-        GankFragment gankFragment2 = new GankFragment();
+        BeautyFragment beautyFragment = new BeautyFragment();
         fragmentList.add(gankFragment);
-        fragmentList.add(gankFragment2);
+        fragmentList.add(beautyFragment);
         titleList = new ArrayList<>();
         titleList.add("干货");
-        titleList.add("专题");
+        titleList.add("美女");
         pagerAdapter.setList(fragmentList,titleList);
         pagerAdapter.notifyDataSetChanged();
     }

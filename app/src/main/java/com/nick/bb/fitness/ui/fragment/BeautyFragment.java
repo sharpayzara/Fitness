@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.nick.bb.fitness.AndroidApplication;
 import com.nick.bb.fitness.R;
-import com.nick.bb.fitness.api.entity.GankBean;
+import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.injector.components.ApplicationComponent;
-import com.nick.bb.fitness.injector.components.DaggerGankListComponent;
-import com.nick.bb.fitness.injector.components.GankListComponent;
+import com.nick.bb.fitness.injector.components.DaggerBeautyListComponent;
+import com.nick.bb.fitness.injector.components.BeautyListComponent;
 import com.nick.bb.fitness.injector.modules.ActivityModule;
-import com.nick.bb.fitness.injector.modules.GankListModule;
-import com.nick.bb.fitness.mvp.contract.GankListContract;
-import com.nick.bb.fitness.ui.adapter.GankListRecyclerAdapter;
+import com.nick.bb.fitness.injector.modules.BeautyListModule;
+import com.nick.bb.fitness.mvp.contract.BeautyListContract;
+import com.nick.bb.fitness.ui.adapter.BeautyListRecyclerAdapter;
 import com.nick.bb.fitness.ui.widget.LoadingLayout;
 
 import java.util.List;
@@ -31,47 +31,47 @@ import butterknife.ButterKnife;
  * Created by sharpay on 17-3-23.
  */
 
-public class GankFragment extends Fragment implements GankListContract.View {
+public class BeautyFragment extends Fragment implements BeautyListContract.View {
     protected View view;
     @Inject
-    GankListContract.Presenter presenter;
-    GankListRecyclerAdapter mAdapter;
-    @BindView(R.id.gank_list_recycle)
-    RecyclerView gankListRecycle;
+    BeautyListContract.Presenter presenter;
+    BeautyListRecyclerAdapter mAdapter;
+    @BindView(R.id.recycler_view)
+    RecyclerView BeautyListRecycle;
     @BindView(R.id.loading_layout)
     LoadingLayout loadingLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_gank, container, false);
+        view = inflater.inflate(R.layout.fragment_beauty, container, false);
         ButterKnife.bind(this, view);
-        mAdapter = new GankListRecyclerAdapter(this.getActivity());
-        gankListRecycle.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        gankListRecycle.setAdapter(mAdapter);
+        mAdapter = new BeautyListRecyclerAdapter(this.getActivity());
+        BeautyListRecycle.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        BeautyListRecycle.setAdapter(mAdapter);
         injectDependences();
         presenter.attachView(this);
-        loadGankList();
+        loadBeautyList();
         return view;
     }
 
     private void injectDependences() {
         ApplicationComponent applicationComponent = ((AndroidApplication) this.getActivity().getApplication()).getApplicationComponent();
-        GankListComponent gankListComponent = DaggerGankListComponent.builder()
+        BeautyListComponent BeautyListComponent = DaggerBeautyListComponent.builder()
                 .applicationComponent(applicationComponent)
                 .activityModule(new ActivityModule(this.getActivity()))
-                .gankListModule(new GankListModule())
+                .beautyListModule(new BeautyListModule())
                 .build();
-        gankListComponent.inject(this);
+        BeautyListComponent.inject(this);
     }
 
-    public void loadGankList() {
-        presenter.loadGankList();
+    public void loadBeautyList() {
+        presenter.loadBeautyList();
     }
 
     @Override
-    public void showGankList(List<GankBean> gankBean) {
-        mAdapter.setGankList(gankBean);
+    public void showBeautyList(List<BeautyBean> BeautyBean) {
+        mAdapter.setBeautyList(BeautyBean);
     }
 
     @Override

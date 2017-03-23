@@ -3,13 +3,11 @@ package com.nick.bb.fitness.mvp.presenter;
 import android.util.Log;
 
 import com.nick.bb.fitness.AndroidApplication;
-import com.nick.bb.fitness.api.entity.decor.GankList;
-import com.nick.bb.fitness.mvp.contract.GankListContract;
-import com.nick.bb.fitness.mvp.usercase.GetGankList;
-import com.nick.bb.fitness.mvp.view.BaseView;
+import com.nick.bb.fitness.api.entity.decor.BeautyList;
+import com.nick.bb.fitness.mvp.contract.BeautyListContract;
+import com.nick.bb.fitness.mvp.usercase.GetBeautyList;
 import com.nick.bb.fitness.util.NetworkUtil;
 
-import rx.Scheduler;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -20,18 +18,18 @@ import rx.subscriptions.CompositeSubscription;
  * Created by sharpay on 17-3-22.
  */
 
-public class GankListPresenter implements GankListContract.Presenter {
-    private GankListContract.View mView;
-    private GetGankList mUsecase;
+public class BeautyListPresenter implements BeautyListContract.Presenter {
+    private BeautyListContract.View mView;
+    private GetBeautyList mUsecase;
     private CompositeSubscription mCompositeSubscription;
 
-    public GankListPresenter(GetGankList mUsecase) {
+    public BeautyListPresenter(GetBeautyList mUsecase) {
         this.mUsecase = mUsecase;
     }
 
 
     @Override
-    public void attachView(GankListContract.View view) {
+    public void attachView(BeautyListContract.View view) {
         mView = view;
         mCompositeSubscription = new CompositeSubscription();
     }
@@ -47,18 +45,18 @@ public class GankListPresenter implements GankListContract.Presenter {
     }
 
     @Override
-    public void loadGankList() {
+    public void loadBeautyList() {
         mCompositeSubscription.clear();
         mView.showProgressBar();
-        Subscription subscription = mUsecase.execute(new GetGankList.RequestValues())
-                .getGankList()
+        Subscription subscription = mUsecase.execute(new GetBeautyList.RequestValues())
+                .getBeautyList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<GankList>() {
+                .subscribe(new Action1<BeautyList>() {
                     @Override
-                    public void call(GankList gankList) {
+                    public void call(BeautyList BeautyList) {
                         mView.hideProgressBar();
-                        mView.showGankList(gankList.getResults());
+                        mView.showBeautyList(BeautyList.getResults());
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -74,4 +72,5 @@ public class GankListPresenter implements GankListContract.Presenter {
                 });
         mCompositeSubscription.add(subscription);
     }
+
 }

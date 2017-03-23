@@ -10,4 +10,5 @@
     <color name="loading_txt">#535253</color>
     <color name="play_line">#F2F2F2</color>
     <color name="mark_text_color">#BEBFBE</color>
+    <color name="channel_num_textcolor">#1A1B1B</color>
 </resources>

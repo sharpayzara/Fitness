@@ -18,7 +18,7 @@
         android:visibility="gone"
         android:src="@mipmap/loading"/>-->
 
-    <com.sumavision.talktv2.ui.widget.PPTVLoading
+    <com.nick.bb.fitness.ui.widget.PPTVLoading
         android:id="@+id/pptv_loading"
         android:layout_width="40dp"
         android:layout_height="30dp"

@@ -1,5 +1,6 @@
 package com.nick.bb.fitness.mvp.contract;
 
+import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.api.entity.GankBean;
 import com.nick.bb.fitness.mvp.presenter.base.BasePresenter;
 import com.nick.bb.fitness.mvp.view.BaseView;
@@ -10,9 +11,9 @@ import java.util.List;
  * Created by sharpay on 17-3-22.
  */
 
-public interface GankListContract {
+public interface BeautyListContract {
     interface View extends BaseView{
-        void showGankList(List<GankBean> albumList);
+        void showBeautyList(List<BeautyBean> albumList);
         void showProgressBar();
         void hideProgressBar();
         void showErrorView();
@@ -20,6 +21,6 @@ public interface GankListContract {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadGankList();
+        void loadBeautyList();
     }
 }

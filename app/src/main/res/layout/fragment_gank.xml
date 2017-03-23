@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlt"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_color">
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:visibility="gone"
@@ -24,16 +25,15 @@
         android:layout_height="1dp"
         android:background="#FFE1E1E1"/>
 
-    <!--<com.nick.bb.fitness.ui.widget.LoadingLayout
-        android:id="@+id/fragment_rec_loadinglayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        >
-    </com.nick.bb.fitness.ui.widget.LoadingLayout>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gank_list_recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></android.support.v7.widget.RecyclerView>
+    <com.nick.bb.fitness.ui.widget.LoadingLayout
+        android:id="@+id/loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </com.nick.bb.fitness.ui.widget.LoadingLayout>
 </RelativeLayout>
