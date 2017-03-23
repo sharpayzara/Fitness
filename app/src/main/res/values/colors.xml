@@ -9,4 +9,5 @@
     <color name="bg_color">#E5E5E5</color>
     <color name="loading_txt">#535253</color>
     <color name="play_line">#F2F2F2</color>
+    <color name="mark_text_color">#BEBFBE</color>
 </resources>

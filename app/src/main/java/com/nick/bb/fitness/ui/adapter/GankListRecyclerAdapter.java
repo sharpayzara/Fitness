@@ -1,21 +1,17 @@
 package com.nick.bb.fitness.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.api.entity.GankBean;
 import com.nick.bb.fitness.api.entity.decor.GankList;
+import com.nick.bb.fitness.util.ImageLoaderProxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,7 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
         list = new ArrayList<>();
     }
 
-    public void setGankList(List<GankBean> list){
+    public void setGankList(List<GankBean> list) {
         this.list.addAll(list);
         notifyDataSetChanged();
     }
@@ -51,6 +47,11 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.descTv.setText(list.get(position).getDesc());
+        holder.typeTv.setText(list.get(position).getType());
+        holder.sourceTv.setText(list.get(position).getSource());
+        if(list.get(position).getImages() != null &&list.get(position).getImages().size() > 0){
+            ImageLoaderProxy.getInstance().loadImage(mContext,list.get(position).getImages().get(0),holder.picIv);
+        }
     }
 
     @Override
@@ -59,9 +60,14 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        GankList bean;
+        @BindView(R.id.pic_iv)
+        ImageView picIv;
         @BindView(R.id.desc_tv)
         TextView descTv;
+        @BindView(R.id.type_tv)
+        TextView typeTv;
+        @BindView(R.id.source_tv)
+        TextView sourceTv;
 
         @OnClick({R.id.desc_tv})
         public void onClick(View view) {

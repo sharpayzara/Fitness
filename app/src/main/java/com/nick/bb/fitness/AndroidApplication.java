@@ -3,6 +3,7 @@ package com.nick.bb.fitness;
 import android.app.Application;
 import android.content.Context;
 
+import com.jiongbull.jlog.JLog;
 import com.nick.bb.fitness.injector.components.ApplicationComponent;
 import com.nick.bb.fitness.injector.components.DaggerApplicationComponent;
 import com.nick.bb.fitness.injector.modules.ApplicationModule;
@@ -18,6 +19,8 @@ public class AndroidApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        JLog.init(this)
+                .setDebug(BuildConfig.DEBUG);
         sContext = getApplicationContext();
         setupInjector();
     }
