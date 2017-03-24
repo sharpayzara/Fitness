@@ -53,7 +53,7 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.bean = list.get(position);
-        holder.specialTv.setText(list.get(position).getDesc());
+        holder.specialTv.setText(" @"+ list.get(position).getWho() +" from:"+ list.get(position).getSource()+"   "+list.get(position).getDesc());
         ImageLoaderProxy.getInstance().loadImageCF(mContext,list.get(position).getUrl(),holder.imgIv, ImageLoaderProxy.FormatType.CenterCrop);
 
     }

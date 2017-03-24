@@ -6,18 +6,17 @@
     android:background="@color/bg_color">
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-           <!-- <com.sumavision.talktv2.ui.widget.LMRecyclerView
+            <com.nick.bb.fitness.ui.widget.LMRecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </com.sumavision.talktv2.ui.widget.LMRecyclerView>-->
+            </com.nick.bb.fitness.ui.widget.LMRecyclerView>
         </LinearLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
     <View
@@ -25,11 +24,6 @@
         android:layout_height="1dp"
         android:background="#FFE1E1E1"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/gank_list_recycle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ></android.support.v7.widget.RecyclerView>
     <com.nick.bb.fitness.ui.widget.LoadingLayout
         android:id="@+id/loading_layout"
         android:layout_width="match_parent"
