@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.nick.bb.fitness.injector.components.DaggerWebComponent;
 import com.nick.bb.fitness.injector.components.WebComponent;
 import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.mvp.contract.WebContract;
+import com.nick.bb.fitness.ui.activity.base.ToolBarActivity;
 import com.nick.bb.fitness.util.TipUtil;
 
 import javax.inject.Inject;
@@ -29,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class WebActivity extends AppCompatActivity implements WebContract.View {
+public class WebActivity extends ToolBarActivity implements WebContract.View {
     static final String GANK_TAG = "gank";
     @BindView(R.id.web_content)
     LinearLayout webContent;
@@ -43,7 +45,6 @@ public class WebActivity extends AppCompatActivity implements WebContract.View {
     @Inject
     WebContract.Presenter presenter;
 
-
     public static void loadWebViewActivity(Context from, GankBean gankBean) {
         Intent intent = new Intent(from, WebActivity.class);
         intent.putExtra(GANK_TAG, gankBean);
@@ -51,13 +52,8 @@ public class WebActivity extends AppCompatActivity implements WebContract.View {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
-        ButterKnife.bind(this);
-        injectDependences();
-        presenter.attachView(this);
-        initView();
+    protected int getLayoutResId() {
+        return R.layout.activity_web;
     }
 
     private void injectDependences() {
@@ -70,7 +66,9 @@ public class WebActivity extends AppCompatActivity implements WebContract.View {
 
     }
 
-    private void initView() {
+    protected void initView() {
+        injectDependences();
+        presenter.attachView(this);
         gankBean = (GankBean) getIntent().getSerializableExtra(GANK_TAG);
         setTitle(gankBean.getDesc());
         presenter.setWebViewSettings(webView, gankBean.getUrl());
@@ -142,5 +140,26 @@ public class WebActivity extends AppCompatActivity implements WebContract.View {
             webView = null;
         }
         presenter.unsubscribe();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    if (webView.canGoBack()) {
+                        webView.goBack();
+                    } else {
+                        finish();
+                    }
+                    return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    protected void initToolBar(){
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(canBack());
+
     }
 }
