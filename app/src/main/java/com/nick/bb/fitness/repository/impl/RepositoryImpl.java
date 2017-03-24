@@ -28,7 +28,8 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public Observable<BeautyList> getBeautyList() {
-        return mFitnessApiService.getBeautyList();
+    public Observable<BeautyList> getBeautyList(int page, int size) {
+        return mFitnessApiService.getBeautyList(page,size);
     }
+
 }

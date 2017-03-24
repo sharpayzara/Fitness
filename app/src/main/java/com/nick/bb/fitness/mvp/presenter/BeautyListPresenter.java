@@ -45,10 +45,10 @@ public class BeautyListPresenter implements BeautyListContract.Presenter {
     }
 
     @Override
-    public void loadBeautyList() {
+    public void loadBeautyList(int page, int size) {
         mCompositeSubscription.clear();
         mView.showProgressBar();
-        Subscription subscription = mUsecase.execute(new GetBeautyList.RequestValues())
+        Subscription subscription = mUsecase.execute(new GetBeautyList.RequestValues(page,size))
                 .getBeautyList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

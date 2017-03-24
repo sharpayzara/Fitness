@@ -14,5 +14,5 @@ import rx.Observable;
 public interface Repository {
     Observable<GankList> getGankList();
 
-    Observable<BeautyList> getBeautyList();
+    Observable<BeautyList> getBeautyList(int page,int size);
 }

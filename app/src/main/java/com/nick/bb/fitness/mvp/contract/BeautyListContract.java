@@ -21,6 +21,6 @@ public interface BeautyListContract {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadBeautyList();
+        void loadBeautyList(int page,int size);
     }
 }

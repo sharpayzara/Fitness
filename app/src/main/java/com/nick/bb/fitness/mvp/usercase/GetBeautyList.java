@@ -4,7 +4,6 @@ package com.nick.bb.fitness.mvp.usercase;
 import com.nick.bb.fitness.api.entity.decor.BeautyList;
 import com.nick.bb.fitness.mvp.usercase.base.UseCase;
 import com.nick.bb.fitness.repository.Repository;
-
 import rx.Observable;
 
 /**
@@ -21,12 +20,31 @@ public class GetBeautyList extends UseCase<GetBeautyList.RequestValues,GetBeauty
 
     @Override
     public ResponseValue execute(RequestValues requestValues) {
-        return new ResponseValue(mRepository.getBeautyList());
+        return new ResponseValue(mRepository.getBeautyList(requestValues.getPage(),requestValues.getSize()));
     }
 
     public static final class RequestValues implements UseCase.RequestValues{
+        int page,size;
 
-        public RequestValues(){
+        public RequestValues(int page, int size) {
+            this.page = page;
+            this.size = size;
+        }
+
+        public int getPage() {
+            return page;
+        }
+
+        public void setPage(int page) {
+            this.page = page;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
         }
     }
 

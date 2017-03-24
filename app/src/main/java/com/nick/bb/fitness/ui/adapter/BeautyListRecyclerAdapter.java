@@ -36,7 +36,11 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
     }
     
     public void setBeautyList(List<BeautyBean> list) {
-        this.list.addAll(list);
+        if(list == null){
+            this.list.clear();
+        }else{
+            this.list.addAll(list);
+        }
         notifyDataSetChanged();
     }
 

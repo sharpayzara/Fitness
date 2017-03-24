@@ -3,6 +3,7 @@ package com.nick.bb.fitness.ui.activity.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.jiongbull.jlog.JLog;
 
@@ -35,6 +36,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initData(){}
 
     protected void handData(){}
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //在Action Bar的最左边，就是Home icon和标题的区域
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
