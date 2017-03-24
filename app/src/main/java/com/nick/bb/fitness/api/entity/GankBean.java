@@ -1,12 +1,13 @@
 package com.nick.bb.fitness.api.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by sharpay on 17-3-22.
  */
 
-public class GankBean {
+public class GankBean implements Serializable {
     private String _id;
     private String createdAt;
     private String desc;
@@ -97,4 +98,6 @@ public class GankBean {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
+
 }

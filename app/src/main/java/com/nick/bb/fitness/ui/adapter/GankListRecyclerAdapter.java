@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.api.entity.GankBean;
 import com.nick.bb.fitness.api.entity.decor.GankList;
+import com.nick.bb.fitness.ui.activity.WebActivity;
 import com.nick.bb.fitness.util.ImageLoaderProxy;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
         holder.descTv.setText(list.get(position).getDesc());
         holder.typeTv.setText(list.get(position).getType());
         holder.sourceTv.setText(list.get(position).getSource());
+        holder.bean = list.get(position);
         if(list.get(position).getImages() != null &&list.get(position).getImages().size() > 0){
             ImageLoaderProxy.getInstance().loadImage(mContext,list.get(position).getImages().get(0),holder.picIv);
         }
@@ -68,15 +70,16 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
         TextView typeTv;
         @BindView(R.id.source_tv)
         TextView sourceTv;
+        GankBean bean;
 
-        @OnClick({R.id.desc_tv})
+        @OnClick({R.id.item_rlt})
         public void onClick(View view) {
+            WebActivity.loadWebViewActivity(mContext,bean);
         }
 
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
     }
 }

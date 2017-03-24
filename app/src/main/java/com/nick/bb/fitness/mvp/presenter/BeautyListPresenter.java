@@ -67,7 +67,7 @@ public class BeautyListPresenter implements BeautyListContract.Presenter {
                         }else {
                             mView.showErrorView();
                         }
-                        Log.d("dsfa",throwable.toString());
+                        Log.d("throw",throwable.toString());
                     }
                 });
         mCompositeSubscription.add(subscription);
