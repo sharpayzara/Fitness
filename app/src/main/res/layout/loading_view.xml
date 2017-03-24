@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:clickable="true"
-    android:background="@color/white"
     android:orientation="horizontal"
     >
   <!--  <ImageView
