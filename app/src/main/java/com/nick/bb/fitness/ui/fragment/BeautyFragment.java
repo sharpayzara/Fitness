@@ -19,6 +19,7 @@ import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.injector.modules.BeautyListModule;
 import com.nick.bb.fitness.mvp.contract.BeautyListContract;
 import com.nick.bb.fitness.ui.adapter.BeautyListRecyclerAdapter;
+import com.nick.bb.fitness.ui.fragment.base.BaseFragment;
 import com.nick.bb.fitness.ui.listener.NoDoubleClickListener;
 import com.nick.bb.fitness.ui.widget.LMRecyclerView;
 import com.nick.bb.fitness.ui.widget.LoadingLayout;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by sharpay on 17-3-23.
  */
 
-public class BeautyFragment extends Fragment implements BeautyListContract.View,LMRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class BeautyFragment extends BaseFragment implements BeautyListContract.View,LMRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     protected View view;
     @Inject
     BeautyListContract.Presenter presenter;
@@ -52,10 +53,8 @@ public class BeautyFragment extends Fragment implements BeautyListContract.View,
     boolean canLoadMore = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_beauty, container, false);
-        ButterKnife.bind(this, view);
+    protected void initView() {
+        super.initView();
         mAdapter = new BeautyListRecyclerAdapter(this.getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(mAdapter);
@@ -72,7 +71,17 @@ public class BeautyFragment extends Fragment implements BeautyListContract.View,
                 presenter.loadBeautyList(page,size);
             }
         });
-        return view;
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_gank;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        loadBeautyList();
     }
 
     private void injectDependences() {
@@ -133,9 +142,6 @@ public class BeautyFragment extends Fragment implements BeautyListContract.View,
     @Override
     public void loadMore() {
         if (canLoadMore) {
-            if (!swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.setRefreshing(true);
-            }
             page++;
             presenter.loadBeautyList(page, size);
         } else {

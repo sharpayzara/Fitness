@@ -147,9 +147,6 @@ public class GankFragment  extends BaseFragment implements GankListContract.View
     @Override
     public void loadMore() {
         if (canLoadMore) {
-            if (!swipeRefreshLayout.isRefreshing()) {
-                swipeRefreshLayout.setRefreshing(true);
-            }
             page++;
             presenter.loadGankList(page, size,type);
         } else {
