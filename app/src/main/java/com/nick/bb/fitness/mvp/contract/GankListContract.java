@@ -20,6 +20,6 @@ public interface GankListContract {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void loadGankList();
+        void loadGankList(int page,int size,String type);
     }
 }

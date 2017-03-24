@@ -23,8 +23,8 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public Observable<GankList> getGankList() {
-        return mFitnessApiService.getGankList();
+    public Observable<GankList> getGankList(int page,int size,String type) {
+        return mFitnessApiService.getGankList(page,size,type);
     }
 
     @Override

@@ -40,12 +40,46 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         fragmentList = new ArrayList<Fragment>();
-        GankFragment gankFragment = new GankFragment();
+        Bundle bundle = new Bundle();
+        GankFragment allFragment = new GankFragment();
+        bundle.putString("type","all");
+        allFragment.setArguments(bundle);
+        fragmentList.add(allFragment);
+
+        GankFragment androidFragment = new GankFragment();
+        Bundle androidBundle = new Bundle();
+        androidBundle.putString("type","Android");
+        androidFragment.setArguments(androidBundle);
+        fragmentList.add(androidFragment);
+
+        GankFragment iosFragment = new GankFragment();
+        Bundle iosBundle = new Bundle();
+        iosBundle.putString("type","iOS");
+        iosFragment.setArguments(iosBundle);
+        fragmentList.add(iosFragment);
+
+
+        GankFragment webFragment = new GankFragment();
+        Bundle webBundle = new Bundle();
+        webBundle .putString("type","前端");
+        webFragment.setArguments(webBundle);
+        fragmentList.add(webFragment);
+
+        GankFragment restFragment = new GankFragment();
+        Bundle restBundle = new Bundle();
+        restBundle.putString("type","休息视频");
+        restFragment.setArguments(restBundle);
+        fragmentList.add(restFragment);
+
         BeautyFragment beautyFragment = new BeautyFragment();
-        fragmentList.add(gankFragment);
         fragmentList.add(beautyFragment);
+
         titleList = new ArrayList<>();
-        titleList.add("干货");
+        titleList.add("全部");
+        titleList.add("Android");
+        titleList.add("IOS");
+        titleList.add("前端");
+        titleList.add("休息视频");
         titleList.add("美女");
         pagerAdapter.setList(fragmentList,titleList);
         pagerAdapter.notifyDataSetChanged();

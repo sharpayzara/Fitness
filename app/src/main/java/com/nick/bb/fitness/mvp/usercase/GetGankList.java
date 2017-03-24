@@ -21,12 +21,41 @@ public class GetGankList extends UseCase<GetGankList.RequestValues,GetGankList.R
 
     @Override
     public ResponseValue execute(RequestValues requestValues) {
-        return new ResponseValue(mRepository.getGankList());
+        return new ResponseValue(mRepository.getGankList(requestValues.getPage(),requestValues.getSize(),requestValues.type));
     }
 
     public static final class RequestValues implements UseCase.RequestValues{
+        int page,size;
+        String type;
 
-        public RequestValues(){
+        public RequestValues(int page, int size, String type) {
+            this.page = page;
+            this.size = size;
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public int getPage() {
+            return page;
+        }
+
+        public void setPage(int page) {
+            this.page = page;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public void setSize(int size) {
+            this.size = size;
         }
     }
 

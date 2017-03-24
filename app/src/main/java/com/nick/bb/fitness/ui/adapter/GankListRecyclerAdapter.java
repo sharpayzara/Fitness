@@ -35,7 +35,11 @@ public class GankListRecyclerAdapter extends RecyclerView.Adapter<GankListRecycl
     }
 
     public void setGankList(List<GankBean> list) {
-        this.list.addAll(list);
+        if(list == null){
+            this.list.clear();
+        }else{
+            this.list.addAll(list);
+        }
         notifyDataSetChanged();
     }
 

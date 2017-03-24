@@ -21,10 +21,10 @@ public interface WebContract {
     }
 
     interface Presenter extends BasePresenter<View>{
-        public void setWebViewSettings(WebView webView, String url);
-        public void refresh(WebView webView);
-        public void copyUrl(String text);
-        public void openInBrowser(String url);
-        public void moreOperation(GankBean gankBean);
+        void setWebViewSettings(WebView webView, String url);
+        void refresh(WebView webView);
+        void copyUrl(String text);
+        void openInBrowser(String url);
+        void moreOperation(GankBean gankBean);
     }
 }

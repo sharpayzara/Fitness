@@ -12,7 +12,7 @@ import rx.Observable;
 */
 
 public interface Repository {
-    Observable<GankList> getGankList();
+    Observable<GankList> getGankList(int page,int size,String type);
 
     Observable<BeautyList> getBeautyList(int page,int size);
 }

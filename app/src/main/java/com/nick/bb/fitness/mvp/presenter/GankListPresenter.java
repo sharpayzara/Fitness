@@ -47,10 +47,10 @@ public class GankListPresenter implements GankListContract.Presenter {
     }
 
     @Override
-    public void loadGankList() {
+    public void loadGankList(int page,int size,String type) {
         mCompositeSubscription.clear();
         mView.showProgressBar();
-        Subscription subscription = mUsecase.execute(new GetGankList.RequestValues())
+        Subscription subscription = mUsecase.execute(new GetGankList.RequestValues(page,size,type))
                 .getGankList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
