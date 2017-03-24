@@ -18,6 +18,7 @@ import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.injector.modules.GankListModule;
 import com.nick.bb.fitness.mvp.contract.GankListContract;
 import com.nick.bb.fitness.ui.adapter.GankListRecyclerAdapter;
+import com.nick.bb.fitness.ui.fragment.base.BaseFragment;
 import com.nick.bb.fitness.ui.listener.NoDoubleClickListener;
 import com.nick.bb.fitness.ui.widget.LMRecyclerView;
 import com.nick.bb.fitness.ui.widget.LoadingLayout;
@@ -34,7 +35,7 @@ import butterknife.ButterKnife;
  * Created by sharpay on 17-3-23.
  */
 
-public class GankFragment  extends Fragment implements GankListContract.View,LMRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class GankFragment  extends BaseFragment implements GankListContract.View,LMRecyclerView.LoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
     protected View view;
     @Inject
     GankListContract.Presenter presenter;
@@ -52,11 +53,13 @@ public class GankFragment  extends Fragment implements GankListContract.View,LMR
     boolean canLoadMore = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void preView() {
         type = getArguments().getString("type");
-        view = inflater.inflate(R.layout.fragment_gank, container, false);
-        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    protected void initView() {
+        super.initView();
         mAdapter = new GankListRecyclerAdapter(this.getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(mAdapter);
@@ -65,7 +68,6 @@ public class GankFragment  extends Fragment implements GankListContract.View,LMR
         swipeRefreshLayout.setOnRefreshListener(this);
         injectDependences();
         presenter.attachView(this);
-        loadGankList();
         loadingLayout.setOnRetryClickListener(new NoDoubleClickListener() {
             @Override
             public void onNoDoubleClick(View view) {
@@ -73,7 +75,17 @@ public class GankFragment  extends Fragment implements GankListContract.View,LMR
                 presenter.loadGankList(page, size,type);
             }
         });
-        return view;
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        loadGankList();
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.fragment_gank;
     }
 
     private void injectDependences() {

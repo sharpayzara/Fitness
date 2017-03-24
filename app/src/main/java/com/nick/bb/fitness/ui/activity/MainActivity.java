@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         allFragment.setArguments(bundle);
         fragmentList.add(allFragment);
 
+
+        BeautyFragment beautyFragment = new BeautyFragment();
+        fragmentList.add(beautyFragment);
+
         GankFragment androidFragment = new GankFragment();
         Bundle androidBundle = new Bundle();
         androidBundle.putString("type","Android");
@@ -71,16 +75,13 @@ public class MainActivity extends AppCompatActivity {
         restFragment.setArguments(restBundle);
         fragmentList.add(restFragment);
 
-        BeautyFragment beautyFragment = new BeautyFragment();
-        fragmentList.add(beautyFragment);
-
         titleList = new ArrayList<>();
         titleList.add("全部");
+        titleList.add("美女");
         titleList.add("Android");
         titleList.add("IOS");
         titleList.add("前端");
         titleList.add("休息视频");
-        titleList.add("美女");
         pagerAdapter.setList(fragmentList,titleList);
         pagerAdapter.notifyDataSetChanged();
     }
