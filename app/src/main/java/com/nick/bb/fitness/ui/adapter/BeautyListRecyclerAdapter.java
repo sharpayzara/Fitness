@@ -11,10 +11,8 @@ import android.widget.TextView;
 
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.api.entity.BeautyBean;
-import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.util.CommonUtil;
 import com.nick.bb.fitness.util.ImageLoaderProxy;
-import com.wingsofts.dragphotoview.DragPhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +65,7 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
     public class MyViewHolder extends RecyclerView.ViewHolder {
         BeautyBean bean;
         @BindView(R.id.img_iv)
-        DragPhotoView imgIv;
+        ImageView imgIv;
         @BindView(R.id.special_tv)
         TextView specialTv;
         public MyViewHolder(View itemView) {
