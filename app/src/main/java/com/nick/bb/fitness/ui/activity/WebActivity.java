@@ -70,8 +70,12 @@ public class WebActivity extends ToolBarActivity implements WebContract.View {
         injectDependences();
         presenter.attachView(this);
         gankBean = (GankBean) getIntent().getSerializableExtra(GANK_TAG);
-        setTitle(gankBean.getDesc());
         presenter.setWebViewSettings(webView, gankBean.getUrl());
+    }
+
+    @Override
+    protected void initData() {
+        setTitle(gankBean.getDesc());
     }
 
     @Override
