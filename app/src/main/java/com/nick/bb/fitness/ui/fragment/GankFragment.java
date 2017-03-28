@@ -59,7 +59,6 @@ public class GankFragment  extends BaseFragment implements GankListContract.View
 
     @Override
     protected void initView() {
-        super.initView();
         mAdapter = new GankListRecyclerAdapter(this.getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(mAdapter);
@@ -79,7 +78,6 @@ public class GankFragment  extends BaseFragment implements GankListContract.View
 
     @Override
     protected void initData() {
-        super.initData();
         loadGankList();
     }
 

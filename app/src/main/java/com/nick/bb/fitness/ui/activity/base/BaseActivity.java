@@ -31,9 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void preView(){}
 
-    protected void initView(){}
+    protected abstract void initView();
 
-    protected void initData(){}
+    protected abstract void initData();
 
     protected void handData(){}
 

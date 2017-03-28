@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_no_top_corner_bottom_line">
 
-        <ImageView
+        <com.wingsofts.dragphotoview.DragPhotoView
             android:id="@+id/img_iv"
             android:layout_width="match_parent"
             android:layout_height="150dp"

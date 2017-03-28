@@ -54,7 +54,6 @@ public class BeautyFragment extends BaseFragment implements BeautyListContract.V
 
     @Override
     protected void initView() {
-        super.initView();
         mAdapter = new BeautyListRecyclerAdapter(this.getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(mAdapter);
@@ -80,7 +79,6 @@ public class BeautyFragment extends BaseFragment implements BeautyListContract.V
 
     @Override
     protected void initData() {
-        super.initData();
         loadBeautyList();
     }
 

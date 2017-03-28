@@ -68,6 +68,7 @@ dependencies {
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
     //materialicon
     compile 'net.steamcrafted:materialiconlib:1.1.1'
+    compile 'com.github.githubwing:DragPhotoView:1.0.1'
     //leakcanary
 //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
 //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'

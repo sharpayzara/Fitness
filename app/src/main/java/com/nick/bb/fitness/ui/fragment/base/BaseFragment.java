@@ -29,9 +29,9 @@ public abstract class BaseFragment extends Fragment{
 
     protected void preView(){}
 
-    protected void initView(){}
+    protected abstract void initView();
 
-    protected void initData(){}
+    protected abstract void initData();
 
     protected void handData(){}
 

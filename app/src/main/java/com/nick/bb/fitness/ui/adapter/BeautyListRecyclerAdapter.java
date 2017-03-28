@@ -14,6 +14,7 @@ import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.util.CommonUtil;
 import com.nick.bb.fitness.util.ImageLoaderProxy;
+import com.wingsofts.dragphotoview.DragPhotoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
         this.mContext = mContext;
         this.list = new ArrayList<>();
     }
-    
+
     public void setBeautyList(List<BeautyBean> list) {
         if(list == null){
             this.list.clear();
@@ -66,7 +67,7 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
     public class MyViewHolder extends RecyclerView.ViewHolder {
         BeautyBean bean;
         @BindView(R.id.img_iv)
-        ImageView imgIv;
+        DragPhotoView imgIv;
         @BindView(R.id.special_tv)
         TextView specialTv;
         public MyViewHolder(View itemView) {
@@ -74,7 +75,7 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
             ButterKnife.bind(this, itemView);
             ViewGroup.LayoutParams params = imgIv.getLayoutParams();
             params.height = CommonUtil.screenWidth(mContext) / 2;
-            imgIv.setLayoutParams(params);
+
         }
 
         @OnClick(R.id.img_iv)
