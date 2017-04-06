@@ -23,13 +23,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def retrofitVersion = "2.0.1"
+def retrofitVersion = "2.1.0"
 def okHttpVersion = '3.3.0'
+def retrofitAdapterVersion = "1.0.0"
 def glideVersion = "3.7.0"
 def stethoVersion = "1.3.1"
 def jlogVersion = "1.0.5"
-def rxjavaVersion = "1.1.0"
-def rxandroidVersion = "1.2.0"
+def rxjavaVersion = "2.0.1"
+def rxandroidVersion = "2.0.1"
 def rxlifecycleVersion = "0.6.1"
 def supportLibVersion = "25.1.1"
 def butterknifeVersion = "8.0.1"
@@ -51,7 +52,7 @@ def daggerVersion = 2.0
 
 project.ext {
     libRetrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    libRetrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+    libRetrofitAdapterRxJava = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${retrofitAdapterVersion}"
     libRetrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     libOkHttp = "com.squareup.okhttp3:okhttp:${okHttpVersion}"
     libOkHttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
@@ -59,8 +60,8 @@ project.ext {
     libStetho = "com.facebook.stetho:stetho:${stethoVersion}"
     libStethoOkhttp = "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
     libJlog = "com.jiongbull:jlog:${jlogVersion}"
-    libRxJava = "io.reactivex:rxjava:${rxjavaVersion}"
-    libRxAndroid = "io.reactivex:rxandroid:${rxandroidVersion}"
+    libRxJava = "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
+    libRxAndroid = "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
     libRxLifecycle = "com.trello:rxlifecycle:${rxlifecycleVersion}"
     libRxLifecycleComponents = "com.trello:rxlifecycle-components:${rxlifecycleVersion}"
     libButterknifeCompiler= "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
