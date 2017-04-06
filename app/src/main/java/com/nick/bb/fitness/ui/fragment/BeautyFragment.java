@@ -1,20 +1,15 @@
 package com.nick.bb.fitness.ui.fragment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.nick.bb.fitness.AndroidApplication;
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.api.entity.BeautyBean;
 import com.nick.bb.fitness.injector.components.ApplicationComponent;
-import com.nick.bb.fitness.injector.components.DaggerBeautyListComponent;
 import com.nick.bb.fitness.injector.components.BeautyListComponent;
+import com.nick.bb.fitness.injector.components.DaggerBeautyListComponent;
 import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.injector.modules.BeautyListModule;
 import com.nick.bb.fitness.mvp.contract.BeautyListContract;
@@ -24,13 +19,11 @@ import com.nick.bb.fitness.ui.listener.NoDoubleClickListener;
 import com.nick.bb.fitness.ui.widget.LMRecyclerView;
 import com.nick.bb.fitness.ui.widget.LoadingLayout;
 import com.nick.bb.fitness.util.TipUtil;
-
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by sharpay on 17-3-23.
@@ -47,7 +40,6 @@ public class BeautyFragment extends BaseFragment implements BeautyListContract.V
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.loading_layout)
     LoadingLayout loadingLayout;
-
     int page = 1;
     int size = 20;
     boolean canLoadMore = true;
@@ -84,12 +76,12 @@ public class BeautyFragment extends BaseFragment implements BeautyListContract.V
 
     private void injectDependences() {
         ApplicationComponent applicationComponent = ((AndroidApplication) this.getActivity().getApplication()).getApplicationComponent();
-        BeautyListComponent BeautyListComponent = DaggerBeautyListComponent.builder()
+        BeautyListComponent beautyListComponent = DaggerBeautyListComponent.builder()
                 .applicationComponent(applicationComponent)
                 .activityModule(new ActivityModule(this.getActivity()))
                 .beautyListModule(new BeautyListModule())
                 .build();
-        BeautyListComponent.inject(this);
+        beautyListComponent.inject(this);
     }
 
     public void loadBeautyList() {
@@ -157,5 +149,11 @@ public class BeautyFragment extends BaseFragment implements BeautyListContract.V
             swipeRefreshLayout.setRefreshing(true);
         }
         presenter.loadBeautyList(page,size);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.unsubscribe();
     }
 }

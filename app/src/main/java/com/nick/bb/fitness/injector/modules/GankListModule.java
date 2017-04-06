@@ -16,12 +16,7 @@ import dagger.Provides;
 public class GankListModule {
 
     @Provides
-    GankListContract.Presenter getGankListPresenter(GetGankList getGankList) {
-        return new GankListPresenter(getGankList);
-    }
-
-    @Provides
-    GetGankList getGankListUsecase(Repository repository) {
-        return new GetGankList(repository);
+    GankListContract.Presenter getGankListPresenter(GankListPresenter presenter) {
+        return presenter;
     }
 }

@@ -2,62 +2,42 @@ package com.nick.bb.fitness.mvp.usercase;
 
 
 import com.nick.bb.fitness.api.entity.decor.BeautyList;
+import com.nick.bb.fitness.executor.PostExecutionThread;
+import com.nick.bb.fitness.executor.ThreadExecutor;
 import com.nick.bb.fitness.mvp.usercase.base.UseCase;
 import com.nick.bb.fitness.repository.Repository;
-import rx.Observable;
+
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * Created by sharpay on 17-3-22.
  */
 
-public class GetBeautyList extends UseCase<GetBeautyList.RequestValues,GetBeautyList.ResponseValue> {
+public class GetBeautyList  extends UseCase<BeautyList, GetBeautyList.Params> {
 
     private final Repository mRepository;
 
-    public GetBeautyList(Repository repository) {
+    @Inject
+    GetBeautyList(Repository repository, ThreadExecutor threadExecutor,
+                  PostExecutionThread postExecutionThread) {
+        super(threadExecutor, postExecutionThread);
         mRepository = repository;
     }
 
     @Override
-    public ResponseValue execute(RequestValues requestValues) {
-        return new ResponseValue(mRepository.getBeautyList(requestValues.getPage(),requestValues.getSize()));
+    public Observable<BeautyList> buildUseCaseObservable(GetBeautyList.Params params) {
+        return this.mRepository.getBeautyList(params.page,params.size);
     }
 
-    public static final class RequestValues implements UseCase.RequestValues{
+
+    public static final class Params {
         int page,size;
 
-        public RequestValues(int page, int size) {
+        public Params(int page, int size) {
             this.page = page;
             this.size = size;
-        }
-
-        public int getPage() {
-            return page;
-        }
-
-        public void setPage(int page) {
-            this.page = page;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void setSize(int size) {
-            this.size = size;
-        }
-    }
-
-    public static final class ResponseValue implements UseCase.ResponseValue {
-
-        private final Observable<BeautyList> mBeautyListObservable;
-
-        public ResponseValue(Observable<BeautyList> mBeautyListObservable) {
-            this.mBeautyListObservable = mBeautyListObservable;
-        }
-
-        public Observable<BeautyList> getBeautyList(){
-            return mBeautyListObservable;
         }
     }
 

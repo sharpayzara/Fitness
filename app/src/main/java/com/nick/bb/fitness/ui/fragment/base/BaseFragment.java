@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.nick.bb.fitness.injector.HasComponent;
+
 import butterknife.ButterKnife;
+
 
 /**
  * Created by sharpay on 17-3-24.
@@ -34,5 +37,9 @@ public abstract class BaseFragment extends Fragment{
     protected abstract void initData();
 
     protected void handData(){}
+
+    protected <C> C getComponent(Class<C> componentType) {
+        return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
+    }
 
 }

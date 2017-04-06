@@ -2,9 +2,6 @@ package com.nick.bb.fitness.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -12,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
-
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.nick.bb.fitness.AndroidApplication;
 import com.nick.bb.fitness.R;
@@ -24,12 +20,8 @@ import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.mvp.contract.WebContract;
 import com.nick.bb.fitness.ui.activity.base.ToolBarActivity;
 import com.nick.bb.fitness.util.TipUtil;
-
 import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
 
 public class WebActivity extends ToolBarActivity implements WebContract.View {
     static final String GANK_TAG = "gank";

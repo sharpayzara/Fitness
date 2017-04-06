@@ -1,50 +1,65 @@
 package com.nick.bb.fitness.mvp.usercase.base;
 
+import com.nick.bb.fitness.executor.PostExecutionThread;
+import com.nick.bb.fitness.executor.ThreadExecutor;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by sharpay on 17-3-22.
  */
 
-public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase.ResponseValue> {
+public abstract class UseCase<T, Params> {
 
-    private Q mRequestValues;
+    private final ThreadExecutor threadExecutor;
+    private final PostExecutionThread postExecutionThread;
+    private final CompositeDisposable disposables;
 
-    public void setRequestValues(Q requestValues) {
-        mRequestValues = requestValues;
-    }
-
-    public Q getRequestValues() {
-        return mRequestValues;
-    }
-
-    public abstract P execute(Q requestValues);
-
-    /**
-     * Data passed to a request.
-     */
-    public interface RequestValues {
+    public UseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+        this.threadExecutor = threadExecutor;
+        this.postExecutionThread = postExecutionThread;
+        this.disposables = new CompositeDisposable();
     }
 
     /**
-     * Data received from a request.
+     * Builds an {@link Observable} which will be used when executing the current {@link UseCase}.
      */
-    public interface ResponseValue {
+    public abstract Observable<T> buildUseCaseObservable(Params params);
+
+    /**
+     * Executes the current use case.
+     *
+     * @param observer {@link DisposableObserver} which will be listening to the observable build
+     * by {@link #buildUseCaseObservable(Params)} ()} method.
+     * @param params Parameters (Optional) used to build/execute this use case.
+     */
+    public void execute(DisposableObserver<T> observer, Params params) {
+        final Observable<T> observable = this.buildUseCaseObservable(params)
+                .subscribeOn(Schedulers.from(threadExecutor))
+                .observeOn(postExecutionThread.getScheduler());
+        addDisposable(observable.subscribeWith(observer));
     }
 
-    public class CommonRequestValue implements UseCase.RequestValues{
-        public List params;
-        public CommonRequestValue (Object... objects){
-            if(params != null){
-                params = new ArrayList();
-                for(int i = 0; i < objects.length; i++){
-                    params.add(objects[i]);
-                }
-            }
+    /**
+     * Dispose from current {@link CompositeDisposable}.
+     */
+    public void dispose() {
+        if (!disposables.isDisposed()) {
+            disposables.dispose();
         }
-        public Object get(int index){
-            return params.get(index);
-        }
+    }
+
+    /**
+     * Dispose from current {@link CompositeDisposable}.
+     */
+    private void addDisposable(Disposable disposable) {
+        disposables.add(disposable);
     }
 }

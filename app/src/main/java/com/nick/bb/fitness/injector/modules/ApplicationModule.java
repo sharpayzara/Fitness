@@ -3,7 +3,13 @@ package com.nick.bb.fitness.injector.modules;
 import android.app.Application;
 
 import com.nick.bb.fitness.AndroidApplication;
+import com.nick.bb.fitness.executor.JobExecutor;
+import com.nick.bb.fitness.executor.PostExecutionThread;
+import com.nick.bb.fitness.executor.ThreadExecutor;
+import com.nick.bb.fitness.executor.UIThread;
 import com.nick.bb.fitness.injector.scope.PerApplication;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,13 +27,25 @@ public class ApplicationModule {
 
     @Provides
     @PerApplication
-    public AndroidApplication provideAndroidApplication() {
+    AndroidApplication provideAndroidApplication() {
         return mApplication;
     }
 
     @Provides
     @PerApplication
-    public Application provideApplication() {
+    Application provideApplication() {
         return mApplication;
+    }
+
+    @Provides
+    @PerApplication
+    ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
+        return jobExecutor;
+    }
+
+    @Provides
+    @PerApplication
+    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
+        return uiThread;
     }
 }

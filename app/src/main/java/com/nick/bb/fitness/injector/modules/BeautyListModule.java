@@ -15,12 +15,7 @@ import dagger.Provides;
 public class BeautyListModule {
 
     @Provides
-    BeautyListContract.Presenter getBeautyListPresenter(GetBeautyList getBeautyList) {
-        return new BeautyListPresenter(getBeautyList);
-    }
-
-    @Provides
-    GetBeautyList getBeautyListUsecase(Repository repository) {
-        return new GetBeautyList(repository);
+    BeautyListContract.Presenter getBeautyListPresenter(BeautyListPresenter beautyListPresenter) {
+        return beautyListPresenter;
     }
 }

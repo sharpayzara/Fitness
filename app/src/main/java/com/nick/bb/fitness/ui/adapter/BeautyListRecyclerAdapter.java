@@ -27,11 +27,12 @@ import butterknife.OnClick;
 public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRecyclerAdapter.MyViewHolder> {
 
     private Context mContext;
-    List<BeautyBean> list;
-
+    private List<BeautyBean> list;
+    private List<BeautyBean> oldList;
     public BeautyListRecyclerAdapter(Context mContext) {
         this.mContext = mContext;
         this.list = new ArrayList<>();
+        oldList = new ArrayList<>();
     }
 
     public void setBeautyList(List<BeautyBean> list) {
@@ -41,6 +42,11 @@ public class BeautyListRecyclerAdapter extends RecyclerView.Adapter<BeautyListRe
             this.list.addAll(list);
         }
         notifyDataSetChanged();
+    }
+
+    public List<BeautyBean> getOldBeautyList(){
+        oldList.addAll(list);
+        return list;
     }
 
     @Override

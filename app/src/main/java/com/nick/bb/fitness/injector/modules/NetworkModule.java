@@ -2,6 +2,7 @@ package com.nick.bb.fitness.injector.modules;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.nick.bb.fitness.AndroidApplication;
 import com.nick.bb.fitness.api.interceptor.LoggingInterceptor;
 import com.nick.bb.fitness.injector.scope.PerApplication;
@@ -19,7 +20,6 @@ import dagger.Provides;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -59,7 +59,7 @@ public class NetworkModule {
                 .baseUrl(endpointUrl)
                 .client(client)
                 .addConverterFactory(gsonConverterFactory)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit;
     }

@@ -1,19 +1,15 @@
 package com.nick.bb.fitness.ui.fragment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.nick.bb.fitness.AndroidApplication;
 import com.nick.bb.fitness.R;
 import com.nick.bb.fitness.api.entity.GankBean;
 import com.nick.bb.fitness.injector.components.ApplicationComponent;
-import com.nick.bb.fitness.injector.components.GankListComponent;
 import com.nick.bb.fitness.injector.components.DaggerGankListComponent;
+import com.nick.bb.fitness.injector.components.GankListComponent;
 import com.nick.bb.fitness.injector.modules.ActivityModule;
 import com.nick.bb.fitness.injector.modules.GankListModule;
 import com.nick.bb.fitness.mvp.contract.GankListContract;
@@ -29,8 +25,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by sharpay on 17-3-23.
  */
@@ -87,13 +81,16 @@ public class GankFragment  extends BaseFragment implements GankListContract.View
     }
 
     private void injectDependences() {
+       // this.getComponent(HomeComponent.class).inject(this);
+
+
         ApplicationComponent applicationComponent = ((AndroidApplication) this.getActivity().getApplication()).getApplicationComponent();
-        GankListComponent GankListComponent = DaggerGankListComponent.builder()
+        GankListComponent gankListComponent= DaggerGankListComponent.builder()
                 .applicationComponent(applicationComponent)
                 .activityModule(new ActivityModule(this.getActivity()))
                 .gankListModule(new GankListModule())
                 .build();
-        GankListComponent.inject(this);
+        gankListComponent.inject(this);
     }
 
     public void loadGankList() {
@@ -162,5 +159,10 @@ public class GankFragment  extends BaseFragment implements GankListContract.View
             swipeRefreshLayout.setRefreshing(true);
         }
         presenter.loadGankList(page, size,type);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.unsubscribe();
     }
 }

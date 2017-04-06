@@ -7,8 +7,8 @@ import com.nick.bb.fitness.api.entity.decor.BeautyList;
 import com.nick.bb.fitness.api.entity.decor.GankList;
 import com.nick.bb.fitness.repository.Repository;
 
+import io.reactivex.Observable;
 import retrofit2.Retrofit;
-import rx.Observable;
 
 /**
  * Created by sharpay on 17-3-22.
@@ -23,7 +23,7 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public Observable<GankList> getGankList(int page,int size,String type) {
+    public Observable<GankList> getGankList(int page, int size, String type) {
         return mFitnessApiService.getGankList(page,size,type);
     }
 
